@@ -216,6 +216,18 @@ const UserProfile = (props) => {
 											<p className={classes.danger}>{errors.age}</p>
 										)}
 									</Grid>
+									<Grid item xs={12} sm={12} md={12} >
+										<CustomInput
+											required
+											id="address"
+											name="address"
+											label="Address"
+											value="Delhi"
+											inputProps={{
+												disabled: true
+											}}
+										/>
+									</Grid>
 									<Grid item xs={12} sm={6} md={6} >
 										<CustomInput
 											required
@@ -252,7 +264,7 @@ const UserProfile = (props) => {
 											}}
 										/>
 									</Grid>
-									<Grid item xs={12} sm={6} md={6} >
+									{/* <Grid item xs={12} sm={6} md={6} >
 										<CustomInput
 											className={`input ${errors.emergencyContact && 'is-danger'}`}
 											required
@@ -265,7 +277,7 @@ const UserProfile = (props) => {
 										{errors.emergency_contact_no && (
 											<p className={classes.danger}>{errors.emergency_contact_no}</p>
 										)}
-									</Grid>
+									</Grid> */}
 									<Grid item xs={12} sm={6} md={6} >
 										<CustomInput
 											required
@@ -409,17 +421,17 @@ const UserProfile = (props) => {
 								<Grid item xs={12} sm={12} md={12} >
 									<div className={classes.stats}>
 										<PhoneAndroidIcon />
-										<span style={{ fontWeight: 400 }}>Mobile:</span>
+										<span style={{ fontWeight: 400 }}>Mobile No :</span>
 										<span>7017483927</span>
 									</div>
 								</Grid>
-								<Grid item xs={12} sm={12} md={12} >
+								{/* <Grid item xs={12} sm={12} md={12} >
 									<div className={classes.stats}>
 										<ContactlessIcon />
 										<span style={{ fontWeight: 400 }}>Emergency No:</span>
 										<span>7017483927</span>
 									</div>
-								</Grid>
+								</Grid> */}
 								<Grid item xs={12} sm={12} md={12} >
 									<div className={classes.stats}>
 										<EmailIcon />

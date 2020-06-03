@@ -31,6 +31,8 @@ const Vitals = () => {
     const alcohol = watch('alcohol');
     const tobacco = watch('tobacco');
     const sleep_pattern = watch('sleep_pattern');
+    const is_irrelevant = watch('is_irrelevant')
+
   
     return (
         <Page
@@ -323,6 +325,34 @@ const Vitals = () => {
                                 />
                                     )}
                                     </Grid>
+                                    <Grid item xs={12} sm={3} md={3} >
+									 
+										<Controller control={control} as={<Checkbox />}
+											name="is_irrelevant"
+											defaultValue={false}
+
+										/>
+										 <label>Is Irrelevant</label>
+									</Grid>
+									{is_irrelevant && (
+										<Grid item xs={12} sm={5} md={5} >
+											<Controller
+												as={<TextField />}
+												error={Boolean(errors.is_irrelevant_error)}
+												name="is_irrelevant_error"
+												rules={{ required: "Please Fill the Error" }}
+												control={control}
+												defaultValue=""
+												label="Error Marked"
+												type="text"
+												helperText={errors.is_irrelevant_error && errors.is_irrelevant_error.message}
+												fullWidth
+												variant="outlined"
+												multiline
+												rows={4}
+											/>
+										</Grid>
+									)}
                                     <Grid item xs={12} sm={12} md={12} >
 										<CardFooter style={{ float: 'right' }}>
 											<Button type="submit" >Submit</Button>

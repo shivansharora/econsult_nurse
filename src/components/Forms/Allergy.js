@@ -27,6 +27,7 @@ const Allergy = () => {
 
 
 	const observation = watch('observation');
+	const is_irrelevant = watch('is_irrelevant')
 	return (
 		<Page
 			className={classes.root}
@@ -67,8 +68,9 @@ const Allergy = () => {
 											fullWidth
 										/>
 									</Grid>
+									<Grid item xs={12} sm={5} md={5} >
 									{observation && (
-										<Grid item xs={12} sm={5} md={5} >
+										
 											<Controller
 												as={<TextField />}
 												error={Boolean(errors.observation_error)}
@@ -79,6 +81,35 @@ const Allergy = () => {
 												label="Error Marked"
 												type="text"
 												helperText={errors.observation_error && errors.observation_error.message}
+												fullWidth
+												variant="outlined"
+												multiline
+												rows={4}
+											/>
+										
+									)}
+									</Grid>
+									<Grid item xs={12} sm={3} md={3} >
+									 
+										<Controller control={control} as={<Checkbox />}
+											name="is_irrelevant"
+											defaultValue={false}
+
+										/>
+										 <label>Is Irrelevant</label>
+									</Grid>
+									{is_irrelevant && (
+										<Grid item xs={12} sm={5} md={5} >
+											<Controller
+												as={<TextField />}
+												error={Boolean(errors.is_irrelevant_error)}
+												name="is_irrelevant_error"
+												rules={{ required: "Please Fill the Error" }}
+												control={control}
+												defaultValue=""
+												label="Error Marked"
+												type="text"
+												helperText={errors.is_irrelevant_error && errors.is_irrelevant_error.message}
 												fullWidth
 												variant="outlined"
 												multiline

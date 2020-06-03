@@ -33,11 +33,15 @@ const Vitals = () => {
     const weight = watch('weight');
     const height = watch('height');
     const bp = watch('bp');
-    const pulse_and_respiration = watch('pulse_and_respiration');
+    const pulse = watch('pulse');
+    const respiration = watch('respiration');
     const temperature = watch('temperature');
-    const temp_and_oxygen = watch('temp_and_oxygen');
+    const temp_location = watch('temp_location');
+    const oxygen_saturation = watch('oxygen_saturation');
     const head_circumference = watch('head_circumference');
     const waist_circumference = watch('waist_circumference');
+    const bmi_check = watch('bmi_check');
+    const bmi_status_check = watch('bmi_status_check');
     const other_notes = watch('other_notes');
 
     return (
@@ -65,7 +69,7 @@ const Vitals = () => {
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12} sm={1} md={1} >
+                                    <Grid item xs={12} sm={2} md={2} >
                                         <Typography style={{ fontWeight: 500, marginTop: '23px' }} variant="body2">
                                             Weight :
                                     </Typography>
@@ -94,7 +98,7 @@ const Vitals = () => {
                                             value="110"
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={4} md={4} >
+                                    <Grid item xs={12} sm={3} md={3} >
                                         {weight && (
                                             <Controller
                                                 as={<TextField />}
@@ -121,7 +125,7 @@ const Vitals = () => {
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12} sm={1} md={1} >
+                                    <Grid item xs={12} sm={2} md={2} >
                                         <Typography style={{ fontWeight: 500, marginTop: '23px' }} variant="body2">
                                             Height :
                                     </Typography>
@@ -150,7 +154,7 @@ const Vitals = () => {
                                             value="110"
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={4} md={4} >
+                                    <Grid item xs={12} sm={3} md={3} >
                                         {height && (
                                             <Controller
                                                 as={<TextField />}
@@ -177,7 +181,7 @@ const Vitals = () => {
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12} sm={1} md={1} >
+                                    <Grid item xs={12} sm={2} md={2} >
                                         <Typography style={{ fontWeight: 500, marginTop: '23px' }} variant="body2">
                                             BP Systolic :
                                     </Typography>
@@ -205,7 +209,7 @@ const Vitals = () => {
                                             value="120"
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={4} md={4} >
+                                    <Grid item xs={12} sm={3} md={3} >
                                         {bp && (
                                             <Controller
                                                 as={<TextField />}
@@ -226,17 +230,17 @@ const Vitals = () => {
                                     </Grid>
                                     <Grid item xs={12} sm={1} md={1} >
                                         <Controller control={control} as={<Checkbox />}
-                                            name="pulse_and_respiration"
+                                            name="pulse"
                                             defaultValue={false}
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12} sm={1} md={1} >
+                                    <Grid item xs={12} sm={2} md={2} >
                                         <Typography style={{ fontWeight: 500, marginTop: '23px' }} variant="body2">
                                             Pulse :
                                 </Typography>
                                     </Grid>
-                                    <Grid item xs={12} sm={2} md={2} >
+                                    <Grid item xs={12} sm={4} md={4} >
                                         <TextField
                                             required
                                             id="pulse"
@@ -245,32 +249,18 @@ const Vitals = () => {
                                             value="50"
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={2} md={2} >
-                                        <Typography style={{ fontWeight: 500, marginTop: '30px', marginLeft: '32px' }} variant="body2">
-                                            Respiration :
-                                </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2} md={2} >
-                                        <TextField
-                                            required
-                                            id="respiration"
-                                            name="respiration"
-                                            label="per min"
-                                            value="110"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} sm={4} md={4} >
-                                        {pulse_and_respiration && (
+                                    <Grid item xs={12} sm={5} md={5} >
+                                        {pulse && (
                                             <Controller
                                                 as={<TextField />}
-                                                error={Boolean(errors.pulse_and_respiration_error)}
-                                                name="pulse_and_respiration_error"
+                                                error={Boolean(errors.pulse_error)}
+                                                name="pulse_error"
                                                 rules={{ required: "Please Fill the Error" }}
                                                 control={control}
                                                 defaultValue=""
                                                 label="Error Marked"
                                                 type="text"
-                                                helperText={errors.pulse_and_respiration_error && errors.pulse_and_respiration_error.message}
+                                                helperText={errors.pulse_error && errors.pulse_error.message}
                                                 fullWidth
                                                 variant="outlined"
                                                 multiline
@@ -280,12 +270,54 @@ const Vitals = () => {
                                     </Grid>
                                     <Grid item xs={12} sm={1} md={1} >
                                         <Controller control={control} as={<Checkbox />}
+                                            name="respiration"
+                                            defaultValue={false}
+                                        />
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={2} md={2} >
+                                        <Typography style={{ fontWeight: 500, marginTop: '23px' }} variant="body2">
+                                        Respiration :
+                                </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} sm={4} md={4} >
+                                        <TextField
+                                            required
+                                            id="respiration"
+                                            name="respiration"
+                                            label="per min"
+                                            value="50"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={5} md={5} >
+                                        {respiration && (
+                                            <Controller
+                                                as={<TextField />}
+                                                error={Boolean(errors.respiration_error)}
+                                                name="respiration_error"
+                                                rules={{ required: "Please Fill the Error" }}
+                                                control={control}
+                                                defaultValue=""
+                                                label="Error Marked"
+                                                type="text"
+                                                helperText={errors.respiration_error && errors.respiration_error.message}
+                                                fullWidth
+                                                variant="outlined"
+                                                multiline
+                                                rows={4}
+                                            />
+                                        )}
+                                    </Grid>
+                                     
+                                  
+                                    <Grid item xs={12} sm={1} md={1} >
+                                        <Controller control={control} as={<Checkbox />}
                                             name="temperature"
                                             defaultValue={false}
                                         />
                                     </Grid>
 
-                                    <Grid item xs={12} sm={1} md={1} >
+                                    <Grid item xs={12} sm={2} md={2} >
                                         <Typography style={{ fontWeight: 500, marginTop: '23px' }} variant="body2">
                                             Temperature :
                                     </Typography>
@@ -314,7 +346,7 @@ const Vitals = () => {
                                             value="110"
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={4} md={4} >
+                                    <Grid item xs={12} sm={3} md={3} >
                                         {temperature && (
                                             <Controller
                                                 as={<TextField />}
@@ -335,55 +367,37 @@ const Vitals = () => {
                                     </Grid>
                                     <Grid item xs={12} sm={1} md={1} >
                                         <Controller control={control} as={<Checkbox />}
-                                            name="temp_and_oxygen"
+                                            name="temp_location"
                                             defaultValue={false}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={2} md={2} >
-                                        <Typography style={{ fontWeight: 500, marginTop: '23px' }} variant="body2">
-                                            Temp Location:
+                                        <Typography style={{ fontWeight: 500, marginTop: '12px' }} variant="body2">
+                                        Temp Location :
                                 </Typography>
                                     </Grid>
-                                    <Grid item xs={12} sm={2} md={2} >
-                                        <TextField
-                                            id="temp_loc"
-                                            name="temp_loc"
-                                            // label="Select"
-                                            value="Oral"
-                                            inputProps={{
-                                                readOnly: true,
-                                            }}
+                                    <Grid item xs={12} sm={4} md={4} >
+                                    <TextField
+                                        id="temp_loc"
+                                        name="temp_loc"
+                                        value="Oral"
+                                        inputProps={{
+                                            readOnly: true,
+                                        }}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={2} md={2} >
-                                        <Typography style={{ fontWeight: 500, marginTop: '12px', marginLeft: '26px' }} variant="body2">
-                                            Oxygen Saturation :
-                                </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} sm={2} md={2} >
-                                        <TextField
-                                            required
-                                            id="oxygen_sat"
-                                            name="oxygen_sat"
-                                            label="%"
-                                            value="20"
-                                            inputProps={{
-                                                readOnly: true,
-                                            }}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} sm={3} md={3} >
-                                        {temp_and_oxygen && (
+                                    <Grid item xs={12} sm={5} md={5} >
+                                        {temp_location && (
                                             <Controller
                                                 as={<TextField />}
-                                                error={Boolean(errors.temp_all_error)}
-                                                name="temp_all_error"
+                                                error={Boolean(errors.temp_loc_error)}
+                                                name="temp_loc_error"
                                                 rules={{ required: "Please Fill the Error" }}
                                                 control={control}
                                                 defaultValue=""
                                                 label="Error Marked"
                                                 type="text"
-                                                helperText={errors.temp_all_error && errors.temp_all_error.message}
+                                                helperText={errors.temp_loc_error && errors.temp_loc_error.message}
                                                 fullWidth
                                                 variant="outlined"
                                                 multiline
@@ -391,7 +405,50 @@ const Vitals = () => {
                                             />
                                         )}
                                     </Grid>
-
+                                    <Grid item xs={12} sm={1} md={1} >
+                                        <Controller control={control} as={<Checkbox />}
+                                            name="oxygen_saturation"
+                                            defaultValue={false}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={2} md={2} >
+                                        <Typography style={{ fontWeight: 500, marginTop: '12px' }} variant="body2">
+                                        Oxygen Saturation  :
+                                </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} sm={4} md={4} >
+                                    <TextField
+                                        required
+                                        id="oxygen_sat"
+                                        name="oxygen_sat"
+                                        label="%"
+                                        value="20"
+                                        inputProps={{
+                                            readOnly: true,
+                                        }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={5} md={5} >
+                                        {oxygen_saturation && (
+                                            <Controller
+                                                as={<TextField />}
+                                                error={Boolean(errors.oxygen_sat_error)}
+                                                name="oxygen_sat_error"
+                                                rules={{ required: "Please Fill the Error" }}
+                                                control={control}
+                                                defaultValue=""
+                                                label="Error Marked"
+                                                type="text"
+                                                helperText={errors.oxygen_sat_error && errors.oxygen_sat_error.message}
+                                                fullWidth
+                                                variant="outlined"
+                                                multiline
+                                                rows={4}
+                                            />
+                                        )}
+                                    </Grid>
+                                      
+ 
                                     <Grid item xs={12} sm={1} md={1} >
                                         <Controller control={control} as={<Checkbox />}
                                             name="head_circumference"
@@ -400,7 +457,7 @@ const Vitals = () => {
                                     </Grid>
                                     <Grid item xs={12} sm={2} md={2} >
                                         <Typography style={{ fontWeight: 500, marginTop: '23px' }} variant="body2">
-                                            Head Circumference :
+                                            Head Circumference 
                                     </Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={3} md={3} >
@@ -456,7 +513,7 @@ const Vitals = () => {
 
                                     <Grid item xs={12} sm={2} md={2} >
                                         <Typography style={{ fontWeight: 500, marginTop: '23px' }} variant="body2">
-                                            Waist Circumference :
+                                            Waist Circumference 
                                     </Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={3} md={3} >
@@ -502,7 +559,89 @@ const Vitals = () => {
                                             />
                                         )}
                                     </Grid>
-
+                                    <Grid item xs={12} sm={1} md={1} >
+                                        <Controller control={control} as={<Checkbox />}
+                                            name="bmi_check"
+                                            defaultValue={false}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={2} md={2} >
+                                        <Typography style={{ fontWeight: 500, marginTop: '12px' }} variant="body2">
+                                        BMI :
+                                </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} sm={4} md={4} >
+                                    <TextField
+                                        id="bmi"
+                                        name="bmi"
+                                        label="kg/m^2"
+                                        value="129.1"
+                                        inputProps={{
+                                            readOnly: true,
+                                        }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={5} md={5} >
+                                        {bmi_check && (
+                                            <Controller
+                                                as={<TextField />}
+                                                error={Boolean(errors.bmi_error)}
+                                                name="bmi_error"
+                                                rules={{ required: "Please Fill the Error" }}
+                                                control={control}
+                                                defaultValue=""
+                                                label="Error Marked"
+                                                type="text"
+                                                helperText={errors.bmi_error && errors.bmi_error.message}
+                                                fullWidth
+                                                variant="outlined"
+                                                multiline
+                                                rows={4}
+                                            />
+                                        )}
+                                    </Grid>
+                                    <Grid item xs={12} sm={1} md={1} >
+                                        <Controller control={control} as={<Checkbox />}
+                                            name="bmi_status_check"
+                                            defaultValue={false}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={2} md={2} >
+                                        <Typography style={{ fontWeight: 500, marginTop: '12px' }} variant="body2">
+                                        BMI Status:  :
+                                    </Typography>
+                                    </Grid>
+                                    <Grid item xs={12} sm={4} md={4} >
+                                    <TextField
+                                        required
+                                        id="bmi_status"
+                                        name="bmi_status"
+                                        label="Type"
+                                        value=""
+                                        inputProps={{
+                                            readOnly: true,
+                                        }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={5} md={5} >
+                                        {bmi_status_check && (
+                                            <Controller
+                                                as={<TextField />}
+                                                error={Boolean(errors.bmi_status_error)}
+                                                name="bmi_status_error"
+                                                rules={{ required: "Please Fill the Error" }}
+                                                control={control}
+                                                defaultValue=""
+                                                label="Error Marked"
+                                                type="text"
+                                                helperText={errors.bmi_status_error && errors.bmi_status_error.message}
+                                                fullWidth
+                                                variant="outlined"
+                                                multiline
+                                                rows={4}
+                                            />
+                                        )}
+                                    </Grid>
                                     <Grid item xs={12} sm={1} md={1} >
                                         <Controller control={control} as={<Checkbox />}
                                             name="other_notes"
@@ -545,7 +684,7 @@ const Vitals = () => {
                                                 rows={4}
                                             />
                                         )}
-                                    </Grid>
+                                    </Grid> 
                                     <Grid item xs={12} sm={12} md={12} >
                                         <CardFooter style={{ float: 'right' }}>
                                             <Button type="submit" >Submit</Button>
